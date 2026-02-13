@@ -1,0 +1,15 @@
+-- Main.ghci
+-- cabal: build-depends: base, dataframe, text, time
+-- cabal: default-extensions: TemplateHaskell, TypeApplications, OverloadedStrings, DataKinds
+
+import qualified DataFrame as D
+
+iris <- D.readParquet "../dataframe/data/iris.parquet"
+
+:remoteScript https://raw.githubusercontent.com/mchav/ihaskell-dataframe/refs/heads/main/rc.hs
+
+$(F.declareColumns iris)
+
+iris |> D.filterWhere (variety .== "Setosa") |> D.filterWhere (sepal_length .> 5.4)
+
+D.derive "ratio" (sepal_width / sepal_length) iris
