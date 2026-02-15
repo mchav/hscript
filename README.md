@@ -2,6 +2,8 @@
 
 Utility for running ad-hoc Haskell/GHCi scripts, generating Haskell markdown documentation, and running reactive notebooks.
 
+![A screenshot of the web ui](./static/images/screenshot.png)
+
 The design document for the project can be found [here](https://docs.google.com/document/d/1XQyKdhEbzZRCkyKS6efbFY0NgRkneJTpMQXTwklZgso/edit?tab=t.0).
 
 This cumulatively solves a couple of problems I've had with other Haskell solutions:
