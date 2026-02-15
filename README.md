@@ -1,4 +1,4 @@
-# hscript
+# sabela
 
 Utility for running ad-hoc Haskell scripts or generating Haskell markdown documentation. This cumulatively solves a couple fo problems I've had with other Haskell solutions:
 
@@ -13,8 +13,8 @@ Will add features as I find useful.
 ## Quick start
 
 ```bash
-git clone https://github.com/mchav/hscript
-cd hscript
+git clone https://github.com/mchav/sabela
+cd sabela
 cabal install
 ```
 
@@ -22,7 +22,7 @@ cabal install
 
 ### Markdown notebook mode
 
-Give hscript a `.md` file and it executes all `` ```haskell `` code blocks in a shared session, inserting results as blockquotes:
+Give sabela a `.md` file and it executes all `` ```haskell `` code blocks in a shared session, inserting results as blockquotes:
 
 ````markdown
 # Iris analysis
@@ -42,7 +42,7 @@ That's all it took.
 Run it:
 
 ```bash
-hscript notebook.md > output.md
+sabela notebook.md > output.md
 ```
 
 Output:
@@ -93,7 +93,7 @@ D.derive "ratio" (sepal_width / sepal_length) iris
 Run it:
 
 ```bash
-hscript analysis.ghci
+sabela analysis.ghci
 ```
 
 Dependencies are resolved similarly to how they are in cabal scripts. Imports, IO binds, expressions, GHCi commands, and Template Haskell splices can appear in any order (note: their order matters relative to each other).

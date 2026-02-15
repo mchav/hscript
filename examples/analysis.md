@@ -1,6 +1,6 @@
-# HScript Example
+# Sabela Example
 
-This is an example of HScript, a Haskell static notebook-like thing.
+This is an example of Sabela, a Haskell static notebook-like thing.
 
 ```haskell
 print (5 + 5)

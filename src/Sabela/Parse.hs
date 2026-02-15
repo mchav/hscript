@@ -1,4 +1,4 @@
-module HScript.Parse (
+module Sabela.Parse (
     ScriptFile (..),
     CabalMeta (..),
     Line (..),

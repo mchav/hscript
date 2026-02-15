@@ -1,4 +1,4 @@
-module HScript.Markdown (
+module Sabela.Markdown (
     Segment (..),
     parseMarkdown,
     reassemble,
@@ -62,7 +62,7 @@ reassemble = T.concat . map renderPair
 renderPair :: (Segment, Maybe Text) -> Text
 renderPair (Prose t, _) = t
 renderPair (CodeBlock lang code, mOutput) =
-    let fence = "```" <> lang <> "\n" <> code <> "```\n"
+    let fence = "\n```" <> lang <> "\n" <> code <> "\n```\n"
         output = case mOutput of
             Nothing -> ""
             Just out

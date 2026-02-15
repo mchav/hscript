@@ -1,10 +1,10 @@
-module HScript.Transform (
+module Sabela.Transform (
     toGhciScript,
 ) where
 
 import Data.Text (Text)
 import qualified Data.Text as T
-import HScript.Parse (Line (..))
+import Sabela.Parse (Line (..))
 
 toGhciScript :: [Line] -> Text
 toGhciScript = T.unlines . concatMap renderBlock . groupBlocks . map rewriteLine
