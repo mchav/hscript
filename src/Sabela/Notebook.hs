@@ -15,7 +15,7 @@ import Sabela.Run (runScriptCapture)
 import Sabela.Transform (toGhciScript)
 
 marker :: Int -> Text
-marker n = "---HSCRIPT_BLOCK_" <> T.pack (show n) <> "_END---"
+marker n = "---SABELA_BLOCK_" <> T.pack (show n) <> "_END---"
 
 runNotebook :: FilePath -> IO ()
 runNotebook path = do
