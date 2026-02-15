@@ -1,4 +1,4 @@
-module HScript.Notebook (
+module Sabela.Notebook (
     runNotebook,
     debugNotebook,
 ) where
@@ -8,14 +8,14 @@ import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import System.Exit (exitFailure)
 
-import HScript.Markdown (Segment (..), parseMarkdown, reassemble)
-import HScript.Parse (CabalMeta (..), Line (..), ScriptFile (..), parseScript)
-import HScript.Resolve (resolveRemotes)
-import HScript.Run (runScriptCapture)
-import HScript.Transform (toGhciScript)
+import Sabela.Markdown (Segment (..), parseMarkdown, reassemble)
+import Sabela.Parse (CabalMeta (..), Line (..), ScriptFile (..), parseScript)
+import Sabela.Resolve (resolveRemotes)
+import Sabela.Run (runScriptCapture)
+import Sabela.Transform (toGhciScript)
 
 marker :: Int -> Text
-marker n = "---HSCRIPT_BLOCK_" <> T.pack (show n) <> "_END---"
+marker n = "---SABELA_BLOCK_" <> T.pack (show n) <> "_END---"
 
 runNotebook :: FilePath -> IO ()
 runNotebook path = do
@@ -87,7 +87,7 @@ parseBlock :: (Int, Text) -> IO (CabalMeta, [Line], Int)
 parseBlock (idx, code) = do
     case parseScript ("<block " ++ show idx ++ ">") code of
         Left err -> do
-            putStrLn $ "hscript: error in code block " ++ show idx ++ ":\n" ++ err
+            putStrLn $ "sabela: error in code block " ++ show idx ++ ":\n" ++ err
             exitFailure
         Right sf -> do
             resolved <- resolveRemotes (scriptLines sf)

@@ -1,4 +1,4 @@
-module HScript.Run (
+module Sabela.Run (
     runScript,
     runScriptCapture,
     resolveDeps,
@@ -6,14 +6,14 @@ module HScript.Run (
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
-import HScript.Parse
+import Sabela.Parse
 import System.Exit (ExitCode (..), exitWith)
 import System.FilePath ((</>))
 import System.IO.Temp (withSystemTempDirectory)
 import System.Process
 
 runScript :: ScriptFile -> T.Text -> IO ()
-runScript sf ghciText = withSystemTempDirectory "hscript" $ \tmpDir -> do
+runScript sf ghciText = withSystemTempDirectory "sabela" $ \tmpDir -> do
     let ghciPath = tmpDir </> "script.ghci"
         envPath = tmpDir </> ".ghc.environment"
     TIO.writeFile ghciPath ghciText
@@ -21,7 +21,7 @@ runScript sf ghciText = withSystemTempDirectory "hscript" $ \tmpDir -> do
     runGhc mEnv (scriptMeta sf) ghciPath
 
 runScriptCapture :: ScriptFile -> T.Text -> IO T.Text
-runScriptCapture sf ghciText = withSystemTempDirectory "hscript" $ \tmpDir -> do
+runScriptCapture sf ghciText = withSystemTempDirectory "sabela" $ \tmpDir -> do
     let ghciPath = tmpDir </> "script.ghci"
         envPath = tmpDir </> ".ghc.environment"
     TIO.writeFile ghciPath ghciText
@@ -46,7 +46,7 @@ resolveDeps envPath deps = do
     case code of
         ExitSuccess -> pure ()
         ExitFailure n -> do
-            putStrLn $ "hscript: cabal install --lib failed (exit " ++ show n ++ ")"
+            putStrLn $ "sabela: cabal install --lib failed (exit " ++ show n ++ ")"
             exitWith code
 
 ghcArgs :: Maybe FilePath -> CabalMeta -> FilePath -> [String]

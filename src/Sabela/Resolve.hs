@@ -1,4 +1,4 @@
-module HScript.Resolve (
+module Sabela.Resolve (
     resolveRemotes,
 ) where
 
@@ -7,7 +7,7 @@ import qualified Data.Text as T
 import System.Exit (ExitCode (..), exitFailure)
 import System.Process (readProcessWithExitCode)
 
-import HScript.Parse (Line (..), ScriptFile (..), parseScript)
+import Sabela.Parse (Line (..), ScriptFile (..), parseScript)
 
 -- Recursively resolves all nested :remoteScript directives.
 resolveRemotes :: [Line] -> IO [Line]
@@ -19,7 +19,7 @@ resolve (RemoteScript url) = do
     case parseScript (T.unpack url) content of
         Left err -> do
             putStrLn $
-                "hscript: error parsing remote script " ++ T.unpack url ++ ":\n" ++ err
+                "sabela: error parsing remote script " ++ T.unpack url ++ ":\n" ++ err
             exitFailure
         Right sf -> resolveRemotes (scriptLines sf)
 resolve l = pure [l]
@@ -35,7 +35,7 @@ fetchUrl url = do
         ExitSuccess -> pure (T.pack out)
         ExitFailure n -> do
             putStrLn $
-                "hscript: failed to fetch "
+                "sabela: failed to fetch "
                     ++ T.unpack url
                     ++ " (exit "
                     ++ show n

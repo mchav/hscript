@@ -5,11 +5,11 @@ import System.Environment (getArgs, getProgName)
 import System.Exit (exitFailure)
 import System.FilePath (takeExtension)
 
-import HScript.Notebook (debugNotebook, runNotebook)
-import HScript.Parse (ScriptFile (..), parseScript)
-import HScript.Resolve (resolveRemotes)
-import HScript.Run (runScript)
-import HScript.Transform (toGhciScript)
+import Sabela.Notebook (debugNotebook, runNotebook)
+import Sabela.Parse (ScriptFile (..), parseScript)
+import Sabela.Resolve (resolveRemotes)
+import Sabela.Run (runScript)
+import Sabela.Transform (toGhciScript)
 
 main :: IO ()
 main = do
@@ -31,7 +31,7 @@ run path = do
     input <- TIO.readFile path
     case parseScript path input of
         Left err -> do
-            putStrLn $ "hscript: parse error:\n" ++ err
+            putStrLn $ "sabela: parse error:\n" ++ err
             exitFailure
         Right sf -> do
             resolved <- resolveRemotes (scriptLines sf)
@@ -43,7 +43,7 @@ debug path = do
     input <- TIO.readFile path
     case parseScript path input of
         Left err -> do
-            putStrLn $ "hscript: parse error:\n" ++ err
+            putStrLn $ "sabela: parse error:\n" ++ err
             exitFailure
         Right sf -> do
             resolved <- resolveRemotes (scriptLines sf)

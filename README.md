@@ -1,6 +1,10 @@
-# hscript
+# sabela
 
-Utility for running ad-hoc Haskell scripts or generating Haskell markdown documentation. This cumulatively solves a couple fo problems I've had with other Haskell solutions:
+Utility for running ad-hoc Haskell/GHCi scripts, generating Haskell markdown documentation, and running reactive notebooks.
+
+The design document for the project can be found [here](https://docs.google.com/document/d/1XQyKdhEbzZRCkyKS6efbFY0NgRkneJTpMQXTwklZgso/edit?tab=t.0).
+
+This cumulatively solves a couple of problems I've had with other Haskell solutions:
 
 * literate Haskell - can't avoid setup so most literate Haskell files have a lot of imports and noise.
 * Jupyter notebooks - You always have to open them with jupyter or convert them. Also can't really avoid setup.
@@ -13,16 +17,20 @@ Will add features as I find useful.
 ## Quick start
 
 ```bash
-git clone https://github.com/mchav/hscript
-cd hscript
+git clone https://github.com/mchav/sabela
+cd sabela
 cabal install
 ```
 
 ## Usage
 
+### Reactive notebooks
+
+Run `cabal run sabela-server`, open `localhost:3000/index.html` and explore `./examples/analysis.md` for a quick tutorial.
+
 ### Markdown notebook mode
 
-Give hscript a `.md` file and it executes all `` ```haskell `` code blocks in a shared session, inserting results as blockquotes:
+Give sabela a `.md` file and it executes all `` ```haskell `` code blocks in a shared session, inserting results as blockquotes:
 
 ````markdown
 # Iris analysis
@@ -42,7 +50,7 @@ That's all it took.
 Run it:
 
 ```bash
-hscript notebook.md > output.md
+sabela notebook.md > output.md
 ```
 
 Output:
@@ -93,7 +101,7 @@ D.derive "ratio" (sepal_width / sepal_length) iris
 Run it:
 
 ```bash
-hscript analysis.ghci
+sabela analysis.ghci
 ```
 
 Dependencies are resolved similarly to how they are in cabal scripts. Imports, IO binds, expressions, GHCi commands, and Template Haskell splices can appear in any order (note: their order matters relative to each other).
